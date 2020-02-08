@@ -85,3 +85,11 @@
 
 <img width="1160" alt="Screenshot 2020-02-08 at 2 34 00 PM" src="https://user-images.githubusercontent.com/10058009/74082465-401af800-4a80-11ea-9c17-30f6f8dd062e.png">
 
+- 5 means -> 5 characters to be printed. (-) minus is used to left justify the string
+- 40 means -> 40 characters of logger name to be printed, if its more than that, it is abbreviated or truncated
+- %n is for next line
+
+### Logger Name length
+
+<img width="1202" alt="Screenshot 2020-02-08 at 2 47 45 PM" src="https://user-images.githubusercontent.com/10058009/74082656-25e21980-4a82-11ea-97da-77e12584cbd0.png">
+
