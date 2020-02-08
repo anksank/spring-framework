@@ -27,6 +27,10 @@ public class Main {
         // log generated number
         log.info("number: {}", number);
 
+        // get Game bean from context
+        // this is another way to get the bean
+        Game game = context.getBean(Game.class);
+
         // close the context - to prevent memory resource leaks
         context.close();
     }

@@ -19,6 +19,10 @@ public class GameImpl implements Game {
     private boolean validNumberRange = true;
 
     // == public methods ==
+    // using setter based dependency injection
+    public void setNumberGenerator(NumberGenerator numberGenerator) {
+        this.numberGenerator = numberGenerator;
+    }
 
     // function to setup the game or restart the game
     @Override

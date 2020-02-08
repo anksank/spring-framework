@@ -6,4 +6,8 @@
 
     <bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
 
+    <bean id="game" class="com.ankit.GameImpl" init-method="reset">
+        <property name="numberGenerator" ref="numberGenerator"/>
+    </bean>
+
 </beans>
