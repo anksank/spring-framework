@@ -121,3 +121,37 @@
 - Parameterised Logging:
   - When we use place holders, ex: `log.info("Number: {}", x);`, & logging level is off, string is not concatenated, in case of using concatenation, `log.info("Number: " + x);`, concatenation still happens & application becomes slow.
 - By default, spring container defines all beans as singleton which is shared across the whole application
+
+## Constructor Based Dependency Injection
+
+- sample piece of code in beans.xml 
+```xml
+<bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
+<bean id="game" class="com.ankit.GameImpl">
+  <constructor-arg ref="numberGenerator"/>
+</bean>
+```
+- sample piece of code in the class
+```java
+// == constructors ==
+public GameImpl(NumberGenerator numberGenerator) {
+  this.numberGenerator = numberGenerator;
+}
+```
+
+## Setter Based Dependency Injection
+
+- beans.xml
+```xml
+<bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
+<bean id="game" class="com.ankit.GameImpl">
+  <property name="numberGenerator" ref="numberGenerator"/>
+</bean>
+```
+- piece of code in class
+```java
+public void setNumberGenerator(NumberGenerator numberGenerator) {
+  this.numberGenerator = numberGenerator;
+}
+```
+- property refers to the name of the parameter passed in the function in the setter class & ref refers to the name id of the bean defined above 'game' bean
