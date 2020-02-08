@@ -185,11 +185,11 @@ public void setNumberGenerator(NumberGenerator numberGenerator) {
 
 - One way to create lifecycle methods like init & destroy is to add them in the beans.xml itself.
 - Example:
-  ```xml
-  <bean id="game" class="com.ankit.GameImpl" init-method="reset">
-    <property name="numberGenerator" ref="numberGenerator"/>
-  </bean>
-  ```
+```xml
+<bean id="game" class="com.ankit.GameImpl" init-method="reset">
+  <property name="numberGenerator" ref="numberGenerator"/>
+</bean>
+```
 - To make sure this works, we need to maintain this configuration in xml all the time. This is difficult to manage. If we plan to use the same method name called `reset` as the init method for all beans, the following change can be done.
 ```xml
   <?xml version="1.0" encoding="UTF-8"?>
