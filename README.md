@@ -155,3 +155,32 @@ public void setNumberGenerator(NumberGenerator numberGenerator) {
 }
 ```
 - property refers to the name of the parameter passed in the function in the setter class & ref refers to the name id of the bean defined above 'game' bean
+
+## Setter or Constrcutor Based Dependency Injection
+
+- Constrcutor based DI can be used for mandatory dependencies & setter methods for optional dependencies
+- Spring team generally advocates constructor injection since it enables one to implement application components as immutable objects and to ensure that required dependencies are not null
+- Constructore injected components are always returned to the client (calling code) in a fully initialized state.
+- Large number of constructor arguments is bad practice (3 should be max) -> it implies that class has lot of responsibilities and should be refactored to better address proper separation of concerns
+- In case of setter dependencies, not-null checks must be performed everywhere
+- Benefit of setter injection
+  - objects of this class become amenable (easily controlled) to reconfiguration or re-injection later
+  
+### Dependency Resolution Process
+
+- Application context is created & initialized with all the configuration metadata that described all beans (using xml or annotations via java code)
+- For each bean, its dependencies are expressed as properties or constructor arguments. These dependencies are provided to the bean when the bean is actually created. Each property or constrcutor argument is an actual bean definition or reference to another bean in the container
+- By default, spring can convert a value supplied in string format to all built-in types, such as int, long, String, boolean, etc.
+- Spring container validates the configuration of each bean as the container is created, however, the bean properties themselves are not set until the bean is created
+- Creation of bean potentially causes a graph of beans to be created, when the bean's dependencies and their dependencies are created and assigned
+
+### Circular Dependencies
+
+- In case of constructor injection, it is possible to create an unresolved circular dependency scenario
+- Example - Class A requires an instance of class B, and class B requires an instance of class A through constrcutor injection. If you configure beans of A & B to be injected into each other , spring container detects this circular reference at runtime & throws ***BeanCurrentlyInCreationException***.
+- Solution is to use Setter based injection for one of the classes, or alternatively, for both classes. Although this is not recommended. In this case, one of the beans will have to be injected into the other prior to being fully initialised itself (chicken/egg scenario)
+- More on this -> https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-constructor-injection
+
+## Using Bean lifecycle callbacks
+
+- One way to create lifecycle methods like init & destroy is to add them in the beans.xml itself.
