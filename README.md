@@ -216,3 +216,38 @@ public void setNumberGenerator(NumberGenerator numberGenerator) {
     <version>1.3.2</version>
   </dependency>
   ```
+  
+## Annotation vs. XML Configuration
+  
+### XML Based Configuration
+
+#### Pros
+  
+- XML Configuration is outside the Java Classes -> Addresses the separation of concerns
+- Whole Configuration is limited to a few files only. If it needs to be changed, then code does not need to go through the process of re-compilation, since its only XML
+- It is more verbose and more understandable to beginners
+
+#### Cons
+
+- XML typing can be prone to errors and is difficult to debug. Error free manual typing is unavoidable even in tools like IntelliJ
+- XML is not type safe. Java code via the compiler will validate the types while compiling, and throw errors if you try to assign wrong type to a variable. This also applies to method arguments, since you are passing explicit types to them
+- XML configuration misses the features of Java Language, requiring all kinds of ugly constructs to do what can be done by simple Java code. (Injecting a bean as a dependency, but missing to define it as a bean -> In Java, exception would be thrown)
+
+### Annotations Based Configuration
+
+#### Pros
+
+- Shorter and more concise configurations
+- Some developers prefer to have their dependency wiring closer to the source & prefer annotations over xml
+- Type Safety is available. It can also self document a class, so that you can quickly look in the class & see what is being injected by Spring
+
+#### Cons
+
+- Annotations reside in the code. All metadata is strewn all throughout the code base. Leads to less control over configurations
+- Annotations clutter POJOs. (Once annotations are added, POJOs are not POJOs anymore)
+- Any change requires re-compilation
+- Less intuitive in nature because of their brevity especially for new developers of Spring
+
+### Combining best of both worlds
+
+- Using `@Configuration` annotation is recommended. Using this we can build Java based configuration classes where we can centralize most of our annotation configuration. Also provides the type safety
