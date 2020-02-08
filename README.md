@@ -85,3 +85,39 @@
 
 <img width="1160" alt="Screenshot 2020-02-08 at 2 34 00 PM" src="https://user-images.githubusercontent.com/10058009/74082465-401af800-4a80-11ea-9c17-30f6f8dd062e.png">
 
+- 5 means -> 5 characters to be printed. (-) minus is used to left justify the string
+- 40 means -> 40 characters of logger name to be printed, if its more than that, it is abbreviated or truncated
+- %n is for next line
+
+### Logger Name length
+
+<img width="1202" alt="Screenshot 2020-02-08 at 2 47 45 PM" src="https://user-images.githubusercontent.com/10058009/74082656-25e21980-4a82-11ea-97da-77e12584cbd0.png">
+
+## UML (Unified Modeling Language)
+
+- UML is a standard visual modeling language intended to be used for
+  - modeling business & similar processes
+  - analysis, design, & implementation of software-based systems
+- Common language for business analysts, software architects & developers used to describe, specify, design, and document existing or new business processes, structure & behavior of artifacts of software systems
+- UML can be applied to application domains like - banking, finance, internet, aerospace, healthcare, etc.
+- UML visually describes class diagrams, use case diagrams & related items
+- More info - https://www.uml-diagrams.org
+
+## Project Setup
+
+- Dependencies can be added in the parent pom and versioning can be maintained in the same place centrally. In that case, the child pom only needs to have an entry of the dependency used without the version information.
+- dependencyManagement tag is used in parent pom (according to current understaning)
+
+## Using a Spring Container
+
+### IoC Container
+
+- Spring IoC (Inversion of Control) container, or simply, Container is a component of the Spring framwork that contains the beans and manages their complete lifecycle.
+- Bean - A simple Java object that is instantiated, managed and assembled by the IoC container. 
+- IoC is also known as dependency injection (DI). 
+  - A process whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method. 
+  - The container then injects those dependencies when it creates the bean. This process is fundamentally the inverse (hence the name, Inversion of Control) of the bean itself controlling the instantiation or location of its dependencies by using direct construction of classes.
+- beans.xml -> can be thought of as a configuration for the container
+- Parameterised Logging:
+  - When we use place holders, ex: `log.info("Number: {}", x);`, & logging level is off, string is not concatenated, in case of using concatenation, `log.info("Number: " + x);`, concatenation still happens & application becomes slow.
+- By default, spring container defines all beans as singleton which is shared across the whole application
