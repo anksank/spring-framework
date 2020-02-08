@@ -203,3 +203,4 @@ public void setNumberGenerator(NumberGenerator numberGenerator) {
       </bean>
   </beans>
 ```
+- A better way is to use jsr250 `PostConstruct` and `PreDestroy` Annotations. -> Recommended approaches
