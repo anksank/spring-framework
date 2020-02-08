@@ -37,3 +37,51 @@
 - target destination of the log output can be changed by switching implementation of appender interface
 - logback reloads its configuration file upon modification
 - logback supports xml and groovy configurations
+
+## Using logging with logback
+
+- Add dependency from https://mvnrepository.com/ 
+- Sources and Documentation can be downloaded inside intelliJ to browse through the dependencies code
+- To use slf4j API, a logger object has to be created first.
+
+## Logback Configuration
+
+- If not present, logback works with a minimal configuration
+
+### Logback Initialization Steps
+
+- Logback tries to find a file called logback-test.xml in the classpath
+- If not found, it tries to find a file called logback.groovy in the classpath
+- If not found, it checks for logback.xml in the classpath
+- If not found, the service-provider loading facility (introduced in jdk 1.6) is used to resolve the implementation of a Configurator Service
+- If none of the above work, logback tries configures itself automatically using the BasicConfigurator which will cause logging output to be directed to console.
+
+### Logback Configuration Example
+
+```xml
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>%date [%thread] [%-5level] %logger{50} - %message%n</pattern>
+    </encoder>
+  </appender>
+  
+  <logger name="com.ankit" level="DEBUG"/>
+  
+  <root level="INFO">
+    <appender-ref ref="STDOUT"/>
+  </root>
+</configuration>
+```
+
+### Loggers
+
+- Loggers are objects with names (case-sensitive). It follows the hierarchical naming rule (there can be parent and child relationships among loggers).
+- Example - com.ankit is a parent of com.ankit.springdemo.
+- root logger sits at top of hierarchy (it cannot be retrived by name like other loggers).
+- root logger always exists by default in a log4j system
+
+### Pattern Conversion
+
+<img width="1160" alt="Screenshot 2020-02-08 at 2 34 00 PM" src="https://user-images.githubusercontent.com/10058009/74082465-401af800-4a80-11ea-9c17-30f6f8dd062e.png">
+
