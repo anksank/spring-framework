@@ -251,3 +251,10 @@ public void setNumberGenerator(NumberGenerator numberGenerator) {
 ### Combining best of both worlds
 
 - Using `@Configuration` annotation is recommended. Using this we can build Java based configuration classes where we can centralize most of our annotation configuration. Also provides the type safety
+
+## Autowiring Beans
+
+Changes to make use of Autowiring -
+- Add a namespace `context` in the beans.xml and use it like shown in branch 001-XML-Based-Config branch of this repo.
+- Remove `CommonAnnotationBeanPostProcessor` from the beans definition and also remove the setter based injection from game bean.
+- Add Autowired annotation for the declaration of `NumberGenerator` object
