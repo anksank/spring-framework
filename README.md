@@ -121,3 +121,133 @@
 - Parameterised Logging:
   - When we use place holders, ex: `log.info("Number: {}", x);`, & logging level is off, string is not concatenated, in case of using concatenation, `log.info("Number: " + x);`, concatenation still happens & application becomes slow.
 - By default, spring container defines all beans as singleton which is shared across the whole application
+
+## Constructor Based Dependency Injection
+
+- sample piece of code in beans.xml 
+```xml
+<bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
+<bean id="game" class="com.ankit.GameImpl">
+  <constructor-arg ref="numberGenerator"/>
+</bean>
+```
+- sample piece of code in the class
+```java
+// == constructors ==
+public GameImpl(NumberGenerator numberGenerator) {
+  this.numberGenerator = numberGenerator;
+}
+```
+
+## Setter Based Dependency Injection
+
+- beans.xml
+```xml
+<bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
+<bean id="game" class="com.ankit.GameImpl">
+  <property name="numberGenerator" ref="numberGenerator"/>
+</bean>
+```
+- piece of code in class
+```java
+public void setNumberGenerator(NumberGenerator numberGenerator) {
+  this.numberGenerator = numberGenerator;
+}
+```
+- property refers to the name of the parameter passed in the function in the setter class & ref refers to the name id of the bean defined above 'game' bean
+
+## Setter or Constrcutor Based Dependency Injection
+
+- Constrcutor based DI can be used for mandatory dependencies & setter methods for optional dependencies
+- Spring team generally advocates constructor injection since it enables one to implement application components as immutable objects and to ensure that required dependencies are not null
+- Constructore injected components are always returned to the client (calling code) in a fully initialized state.
+- Large number of constructor arguments is bad practice (3 should be max) -> it implies that class has lot of responsibilities and should be refactored to better address proper separation of concerns
+- In case of setter dependencies, not-null checks must be performed everywhere
+- Benefit of setter injection
+  - objects of this class become amenable (easily controlled) to reconfiguration or re-injection later
+  
+### Dependency Resolution Process
+
+- Application context is created & initialized with all the configuration metadata that described all beans (using xml or annotations via java code)
+- For each bean, its dependencies are expressed as properties or constructor arguments. These dependencies are provided to the bean when the bean is actually created. Each property or constrcutor argument is an actual bean definition or reference to another bean in the container
+- By default, spring can convert a value supplied in string format to all built-in types, such as int, long, String, boolean, etc.
+- Spring container validates the configuration of each bean as the container is created, however, the bean properties themselves are not set until the bean is created
+- Creation of bean potentially causes a graph of beans to be created, when the bean's dependencies and their dependencies are created and assigned
+
+### Circular Dependencies
+
+- In case of constructor injection, it is possible to create an unresolved circular dependency scenario
+- Example - Class A requires an instance of class B, and class B requires an instance of class A through constrcutor injection. If you configure beans of A & B to be injected into each other , spring container detects this circular reference at runtime & throws ***BeanCurrentlyInCreationException***.
+- Solution is to use Setter based injection for one of the classes, or alternatively, for both classes. Although this is not recommended. In this case, one of the beans will have to be injected into the other prior to being fully initialised itself (chicken/egg scenario)
+- More on this -> https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-constructor-injection
+
+## Using Bean lifecycle callbacks
+
+- One way to create lifecycle methods like init & destroy is to add them in the beans.xml itself.
+- Example:
+```xml
+<bean id="game" class="com.ankit.GameImpl" init-method="reset">
+  <property name="numberGenerator" ref="numberGenerator"/>
+</bean>
+```
+- To make sure this works, we need to maintain this configuration in xml all the time. This is difficult to manage. If we plan to use the same method name called `reset` as the init method for all beans, the following change can be done.
+```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans
+          https://www.springframework.org/schema/beans/spring-beans.xsd" default-init-method="reset">
+      <bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
+      <bean id="game" class="com.ankit.GameImpl">
+          <property name="numberGenerator" ref="numberGenerator"/>
+      </bean>
+  </beans>
+```
+- A better way is to use jsr250 `PostConstruct` and `PreDestroy` Annotations. -> Best practice to work with lifecycle callbacks.
+  - To use this bean, it has to be defined first (by just defining the class in a bean definition), which is done as follows
+  ```xml
+  <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+  ```
+  - Adding PostProcessor bean as an Annotation requires adding a dependency in pom first
+  ```xml
+  <dependency>
+    <groupId>javax.annotation</groupId>
+    <artifactId>javax.annotation-api</artifactId>
+    <version>1.3.2</version>
+  </dependency>
+  ```
+  
+## Annotation vs. XML Configuration
+  
+### XML Based Configuration
+
+#### Pros
+  
+- XML Configuration is outside the Java Classes -> Addresses the separation of concerns
+- Whole Configuration is limited to a few files only. If it needs to be changed, then code does not need to go through the process of re-compilation, since its only XML
+- It is more verbose and more understandable to beginners
+
+#### Cons
+
+- XML typing can be prone to errors and is difficult to debug. Error free manual typing is unavoidable even in tools like IntelliJ
+- XML is not type safe. Java code via the compiler will validate the types while compiling, and throw errors if you try to assign wrong type to a variable. This also applies to method arguments, since you are passing explicit types to them
+- XML configuration misses the features of Java Language, requiring all kinds of ugly constructs to do what can be done by simple Java code. (Injecting a bean as a dependency, but missing to define it as a bean -> In Java, exception would be thrown)
+
+### Annotations Based Configuration
+
+#### Pros
+
+- Shorter and more concise configurations
+- Some developers prefer to have their dependency wiring closer to the source & prefer annotations over xml
+- Type Safety is available. It can also self document a class, so that you can quickly look in the class & see what is being injected by Spring
+
+#### Cons
+
+- Annotations reside in the code. All metadata is strewn all throughout the code base. Leads to less control over configurations
+- Annotations clutter POJOs. (Once annotations are added, POJOs are not POJOs anymore)
+- Any change requires re-compilation
+- Less intuitive in nature because of their brevity especially for new developers of Spring
+
+### Combining best of both worlds
+
+- Using `@Configuration` annotation is recommended. Using this we can build Java based configuration classes where we can centralize most of our annotation configuration. Also provides the type safety
