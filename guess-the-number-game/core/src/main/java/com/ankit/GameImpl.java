@@ -3,6 +3,9 @@ package com.ankit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class GameImpl implements Game {
 
     // == constants ==
@@ -18,14 +21,9 @@ public class GameImpl implements Game {
     private int remainingGuesses;
     private boolean validNumberRange = true;
 
-    // == public methods ==
-    // using setter based dependency injection
-    public void setNumberGenerator(NumberGenerator numberGenerator) {
-        this.numberGenerator = numberGenerator;
-    }
-
-    // function to setup the game or restart the game
+    // == init ==
     @Override
+    @PostConstruct
     public void reset() {
         smallest = 0;
         guess = 0;
@@ -33,6 +31,17 @@ public class GameImpl implements Game {
         biggest = numberGenerator.getMaxNumber();
         number = numberGenerator.next();
         log.debug("the number is {}", number);
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        log.info("in Game preDestroy()");
+    }
+
+    // == public methods ==
+    // using setter based dependency injection
+    public void setNumberGenerator(NumberGenerator numberGenerator) {
+        this.numberGenerator = numberGenerator;
     }
 
     @Override
