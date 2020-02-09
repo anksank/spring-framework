@@ -254,7 +254,8 @@
 
 ## Autowiring Beans
 
-Changes to make use of Autowiring -
+### Changes to make use of Autowiring
+
 - Add a namespace `context` in the beans.xml and use it to define a bean below in the xml like shown in branch 002-Annotation-Based-Config branch of this repo.
   ```xml
   <context:annotation-config/>
@@ -262,3 +263,34 @@ Changes to make use of Autowiring -
   This defines a bean called `org.springframework.context.annotation.internalCommonAnnotationProcessor`
 - Remove `CommonAnnotationBeanPostProcessor` from the beans definition and also remove the setter based injection from game bean.
 - Add Autowired annotation for the declaration of `NumberGenerator` object
+- `@Autowired` annotation can also be used with constructor and setter based dependency injection
+- It could be added to parameters of a constructor or setter method
+- In branch 002-Annotation-Based-Config, we have used field injection, but Spring recommends to use constructor injection as it enables you to implement application components as immutable object & to ensure that required dependencies are not null
+- Other recommendations by Spring team - https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-constructor-injection
+
+## Beans as Components
+
+- Spring provides several stereotype annotations such as `@Component`, `@Service` & `@Controller`
+- Stereotype -> something conforming to a fixed or general pattern
+- It is recommended that you annotate controller classes with @Controller, service classes with @Service, etc. This cuts down the need to use Spring XML based configuration for these components
+
+### @Component
+
+Generic stereotype for any Spring-managed component.  
+`@Repository`, @Service, @Controller are specializations of @Component for more specific use cases, for instance, in the persistence, service & presentation layers, respectively.  
+
+### Changes to Code
+
+- Replace context:annotation-config tag by component-scan tag as shown in branch 003-Component-Scan. Use of this context implicitly enables the functionality of annotation-config element.
+- `base-package` attribute means, the package that needs to be scanned for beans
+  ```xml
+  <context:component-scan base-package="com.ankit"/>
+  ```
+- All beans entries can be removed from the beans.xml after adding this
+- Add @Component annotation to the impl classes. The reason this is not done to the interface is that, interface should ideally be decoupled with spring specific annotations
+- The name of the bean that is instantiated by the spring container is same as name of the class with first letter as small. For example, for class GameImpl -> bean would be gameImpl, unless a name is specified along with @Component annotation.
+
+## Using Java Annotation Configuration
+
+- @Configuration annotation means that the class declares bean methods -> methods that represent bean definition, also called producer method since they instantiate, configure and return a bean.
+- Bean methods are useful when we need to do some additional configuration.
