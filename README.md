@@ -255,6 +255,6 @@ public void setNumberGenerator(NumberGenerator numberGenerator) {
 ## Autowiring Beans
 
 Changes to make use of Autowiring -
-- Add a namespace `context` in the beans.xml and use it like shown in branch 001-XML-Based-Config branch of this repo.
+- Add a namespace `context` in the beans.xml and use it like shown in branch 002-Annotation-Based-Config branch of this repo.
 - Remove `CommonAnnotationBeanPostProcessor` from the beans definition and also remove the setter based injection from game bean.
 - Add Autowired annotation for the declaration of `NumberGenerator` object
