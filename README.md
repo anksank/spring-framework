@@ -125,35 +125,35 @@
 ## Constructor Based Dependency Injection
 
 - sample piece of code in beans.xml 
-```xml
-<bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
-<bean id="game" class="com.ankit.GameImpl">
-  <constructor-arg ref="numberGenerator"/>
-</bean>
-```
+  ```xml
+  <bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
+  <bean id="game" class="com.ankit.GameImpl">
+    <constructor-arg ref="numberGenerator"/>
+  </bean>
+  ```
 - sample piece of code in the class
-```java
-// == constructors ==
-public GameImpl(NumberGenerator numberGenerator) {
-  this.numberGenerator = numberGenerator;
-}
-```
+  ```java
+  // == constructors ==
+  public GameImpl(NumberGenerator numberGenerator) {
+    this.numberGenerator = numberGenerator;
+  }
+  ```
 
 ## Setter Based Dependency Injection
 
 - beans.xml
-```xml
-<bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
-<bean id="game" class="com.ankit.GameImpl">
-  <property name="numberGenerator" ref="numberGenerator"/>
-</bean>
-```
+  ```xml
+  <bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
+  <bean id="game" class="com.ankit.GameImpl">
+    <property name="numberGenerator" ref="numberGenerator"/>
+  </bean>
+  ```
 - piece of code in class
-```java
-public void setNumberGenerator(NumberGenerator numberGenerator) {
-  this.numberGenerator = numberGenerator;
-}
-```
+  ```java
+  public void setNumberGenerator(NumberGenerator numberGenerator) {
+    this.numberGenerator = numberGenerator;
+  }
+  ```
 - property refers to the name of the parameter passed in the function in the setter class & ref refers to the name id of the bean defined above 'game' bean
 
 ## Setter or Constrcutor Based Dependency Injection
@@ -185,37 +185,37 @@ public void setNumberGenerator(NumberGenerator numberGenerator) {
 
 - One way to create lifecycle methods like init & destroy is to add them in the beans.xml itself.
 - Example:
-```xml
-<bean id="game" class="com.ankit.GameImpl" init-method="reset">
-  <property name="numberGenerator" ref="numberGenerator"/>
-</bean>
-```
+  ```xml
+  <bean id="game" class="com.ankit.GameImpl" init-method="reset">
+    <property name="numberGenerator" ref="numberGenerator"/>
+  </bean>
+  ```
 - To make sure this works, we need to maintain this configuration in xml all the time. This is difficult to manage. If we plan to use the same method name called `reset` as the init method for all beans, the following change can be done.
-```xml
-  <?xml version="1.0" encoding="UTF-8"?>
-  <beans xmlns="http://www.springframework.org/schema/beans"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://www.springframework.org/schema/beans
-          https://www.springframework.org/schema/beans/spring-beans.xsd" default-init-method="reset">
-      <bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
-      <bean id="game" class="com.ankit.GameImpl">
-          <property name="numberGenerator" ref="numberGenerator"/>
-      </bean>
-  </beans>
-```
+  ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.springframework.org/schema/beans
+            https://www.springframework.org/schema/beans/spring-beans.xsd" default-init-method="reset">
+        <bean id="numberGenerator" class="com.ankit.NumberGeneratorImpl" />
+        <bean id="game" class="com.ankit.GameImpl">
+            <property name="numberGenerator" ref="numberGenerator"/>
+        </bean>
+    </beans>
+  ```
 - A better way is to use jsr250 `PostConstruct` and `PreDestroy` Annotations. -> Best practice to work with lifecycle callbacks.
   - To use this bean, it has to be defined first (by just defining the class in a bean definition), which is done as follows
-  ```xml
-  <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
-  ```
+    ```xml
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+    ```
   - Adding PostProcessor bean as an Annotation requires adding a dependency in pom first
-  ```xml
-  <dependency>
-    <groupId>javax.annotation</groupId>
-    <artifactId>javax.annotation-api</artifactId>
-    <version>1.3.2</version>
-  </dependency>
-  ```
+    ```xml
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <version>1.3.2</version>
+    </dependency>
+    ```
   
 ## Annotation vs. XML Configuration
   
@@ -255,6 +255,10 @@ public void setNumberGenerator(NumberGenerator numberGenerator) {
 ## Autowiring Beans
 
 Changes to make use of Autowiring -
-- Add a namespace `context` in the beans.xml and use it like shown in branch 002-Annotation-Based-Config branch of this repo.
+- Add a namespace `context` in the beans.xml and use it to define a bean below in the xml like shown in branch 002-Annotation-Based-Config branch of this repo.
+  ```xml
+  <context:annotation-config/>
+  ```
+  This defines a bean called `org.springframework.context.annotation.internalCommonAnnotationProcessor`
 - Remove `CommonAnnotationBeanPostProcessor` from the beans definition and also remove the setter based injection from game bean.
 - Add Autowired annotation for the declaration of `NumberGenerator` object
