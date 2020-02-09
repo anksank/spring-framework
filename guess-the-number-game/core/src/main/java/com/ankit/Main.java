@@ -19,7 +19,8 @@ public class Main {
 
         // returned cached instance of a singleton bean named 'numberGenerator'
         // by default, spring container defines all beans as singleton
-        NumberGenerator numberGenerator = context.getBean("numberGenerator", NumberGenerator.class);
+        // this works only if there is a single implementation of the NumberGenerator interface
+        NumberGenerator numberGenerator = context.getBean(NumberGenerator.class);
 
         // call next() method to get a random number
         int number = numberGenerator.next();
