@@ -1,6 +1,6 @@
 package com.ankit.console;
 
-import com.ankit.AppConfig;
+import com.ankit.config.AppConfig;
 import com.ankit.MessageGenerator;
 import com.ankit.NumberGenerator;
 import org.slf4j.Logger;

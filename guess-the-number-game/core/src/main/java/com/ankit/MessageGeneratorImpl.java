@@ -15,8 +15,6 @@ public class MessageGeneratorImpl implements MessageGenerator {
     @Autowired
     private Game game;
 
-    private int guessCount = 10;
-
     @PostConstruct
     public void init() {
         log.info("Game: {}", game);
@@ -40,7 +38,7 @@ public class MessageGeneratorImpl implements MessageGenerator {
             return "You lost. The number was " + game.getNumber();
         } else if (!game.isValidNumberRange()) {
             return "Invalid Number range!";
-        } else if (game.getRemainingGuesses() == guessCount) {
+        } else if (game.getRemainingGuesses() == game.getGuessCount()) {
             return "What is your first guess?";
         } else {
             String direction = "Lower";
@@ -48,7 +46,7 @@ public class MessageGeneratorImpl implements MessageGenerator {
                 direction = "Higher";
             }
 
-            return direction + "! You have " + game.getRemainingGuesses() + "guesses left";
+            return direction + "! You have " + game.getRemainingGuesses() + " guesses left";
         }
     }
 }
