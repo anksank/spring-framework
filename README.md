@@ -294,3 +294,41 @@ Generic stereotype for any Spring-managed component.
 
 - @Configuration annotation means that the class declares bean methods -> methods that represent bean definition, also called producer method since they instantiate, configure and return a bean.
 - Bean methods are useful when we need to do some additional configuration.
+
+## Application Events
+
+**ApplicationContext** interface has a parent interface called **ApplicationEventPublisher** that encapsulates event publication functionality, this is an additional capability of ApplicationContext.
+
+- Event handling in ApplicationContext is provided through the **ApplicationEvent** class and **ApplicationListener** interface.
+- If a bean that implements ApplicationListener interface is deployed into the context, everytime ApplicationEvent gets published to the ApplicationContext, that bean is notified.
+
+### ContextRefreshedEvent
+
+This is shown in branch 005-ContextRefreshedEvent, where ApplicationListener interface is used.
+
+### Annotation Based ContextRefreshedEvent
+
+Shown in branch 006-Using-Annotation-Events
+
+- 2 Ways to use this:
+  ```java
+  @EventListener
+  public void start(ContextRefreshedEvent event) {
+    log.info("start() -> Container ready for use.");
+  }
+  ```
+  **or**
+  ```java
+  @EventListener(ContextRefreshedEvent.class)
+    public void start() {
+      log.info("start() -> Container ready for use.");
+    }
+  ```
+  
+## Using Qualifiers
+
+- When there is a need for fine-tuning annotation-based autowiring we can use qualifiers.
+- A qualifier is an annotation that you apply to a bean.
+- @Primary annotation is an effective way to use autowiring by type with several instances when one primary candidate can be determined
+- @Qualifier annotation is used when more control over the selection process is required.
+- Using @Import annotation, we can import bean definitions from multiple configuration classes (Helps in modularizing)
