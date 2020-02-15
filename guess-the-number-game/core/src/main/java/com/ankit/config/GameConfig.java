@@ -1,5 +1,7 @@
 package com.ankit.config;
 
+import com.ankit.GuessCount;
+import com.ankit.MaxNumber;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,11 +17,13 @@ public class GameConfig {
 
     // == bean methods ==
     @Bean
+    @MaxNumber
     public int maxNumber() {
         return maxNumber;
     }
 
     @Bean
+    @GuessCount
     public int guessCount() {
         return guessCount;
     }
