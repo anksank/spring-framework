@@ -320,9 +320,9 @@ Shown in branch 006-Using-Annotation-Events
   **or**
   ```java
   @EventListener(ContextRefreshedEvent.class)
-    public void start() {
-      log.info("start() -> Container ready for use.");
-    }
+  public void start() {
+    log.info("start() -> Container ready for use.");
+  }
   ```
   
 ## Using Qualifiers
@@ -332,3 +332,30 @@ Shown in branch 006-Using-Annotation-Events
 - @Primary annotation is an effective way to use autowiring by type with several instances when one primary candidate can be determined
 - @Qualifier annotation is used when more control over the selection process is required.
 - Using @Import annotation, we can import bean definitions from multiple configuration classes (Helps in modularizing)
+
+## Creating Custom Qualifiers
+
+- `@interface` is used to create a Annotation
+- `@Target` annotation is used to denote the elements to which the annotation can be used
+  Example -
+  ```java
+  @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
+  ```
+  ElementType is an ENUM containing constants
+- `@Retention` annotation is used to denote how long the annotation will be retained
+  Example - 
+  ```java
+  @Retention(RetentionPolicy.RUNTIME)
+  ```
+  The annotation will be retained by the Java Virtual Machine during the runtime of the application
+- `@Qualifier` annotation is used to annotation other custom annotations that can in turn be used as qualifiers
+- Now this annotation can be used in the configuration class using @AnnotationName
+- Thus, using qualifiers, any method name can be used
+- [007-Creating-Custom-Annotations](https://github.com/anksank/spring-framework/tree/007-Creating-Custom-Annotations) branch contains changes for this
+
+## Using Properties
+
+- `@PropertySource` annotation is used to load a properties file into a configuration class.
+  `@PropertySource("classpath:config/game.properties")`. `file:` can also be used but `classpath:` is recommended
+- `@Value` annotation is used to read value of a particular property -> `@Value("${game.maxNumber}")`
+- @Value annotation with a default value can be written as -> `@Value("${game.maxNumber:50}")`
