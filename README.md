@@ -359,3 +359,14 @@ Shown in branch 006-Using-Annotation-Events
   `@PropertySource("classpath:config/game.properties")`. `file:` can also be used but `classpath:` is recommended
 - `@Value` annotation is used to read value of a particular property -> `@Value("${game.maxNumber}")`
 - @Value annotation with a default value can be written as -> `@Value("${game.maxNumber:50}")`
+
+## Constructor Injection
+
+- Instead of using @Autowired annotation on the fields, @Autowired annotation can be used in a constructor by passing the same fields and initializing the fields of class.
+```java
+@Autowired
+public NumberGeneratorImpl(@MaxNumber int maxNumber, @MinNumber int minNumber) {
+  this.maxNumber = maxNumber;
+  this.minNumber = minNumber;
+}
+```
