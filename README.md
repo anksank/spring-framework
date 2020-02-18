@@ -363,10 +363,10 @@ Shown in branch 006-Using-Annotation-Events
 ## Constructor Injection
 
 - Instead of using @Autowired annotation on the fields, @Autowired annotation can be used in a constructor by passing the same fields and initializing the fields of class.
-```java
-@Autowired
-public NumberGeneratorImpl(@MaxNumber int maxNumber, @MinNumber int minNumber) {
-  this.maxNumber = maxNumber;
-  this.minNumber = minNumber;
-}
-```
+  ```java
+  @Autowired
+  public NumberGeneratorImpl(@MaxNumber int maxNumber, @MinNumber int minNumber) {
+    this.maxNumber = maxNumber;
+    this.minNumber = minNumber;
+  }
+  ```
