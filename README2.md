@@ -117,3 +117,27 @@ public class Person {
 - With the WebApplicationContext, there are some beans that are registered automatically.
 - Different **View** technologies to render web pages - Groovy Markup, Freemarker, & Thymeleaf
 - Spring MVC can also integrate with other web frameworks
+
+## Setup Maven war plugin
+
+- war -> Web-Application Archive
+- jar -> Java-Application Archive
+- war files contains the resources necessary for developing web application -> [war plugin](http://maven.apache.org/plugins/maven-war-plugin/)
+- When we enable the war package, war plugin is added to the project automatically
+- Below picture shows the project structure
+  <img width="450" alt="Screenshot 2020-02-21 at 9 48 18 PM" src="https://user-images.githubusercontent.com/10058009/75051550-176d1680-54f4-11ea-8a96-1ca62780e958.png">
+
+- web.xml is a deployment descriptor of the servlet based java web application. It declares which servlet exists and which URLs are handled. This declaration can also be achieved by Annotations. (Hence, web.xml is not needed. But without the xml the maven war plugin will fail)
+- WEB-INF directory is not part of the public document tree of the application (cannot be served directly to the client by the container, although the contents are visible to the servlet)
+- Default maven war plugin that gets added is 2.2.0
+- Following configuration can be set if web.xml is not used in the project.
+  ```xml
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-war-plugin</artifactId>
+    <version>3.2.3</version>
+    <configuration>
+      <failOnMissingWebXml>false</failOnMissingWebXml>
+    </configuration>
+  </plugin>
+  ```
