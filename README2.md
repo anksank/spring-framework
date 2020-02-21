@@ -1,4 +1,4 @@
-# Spring Framework (Section 6)
+# Spring Framework (Section 6 & 7)
 
 ## Lombok Introduction
 
@@ -100,3 +100,20 @@ public class Person {
       <systemPath>${basedir}/../lib/lombok-edge.jar</systemPath>
   </dependency>
   ```
+  
+## Spring MVC
+
+- Spring Web MVC -> Original web framework built on the Servlet API
+- Its shipped in the spring framework from the very beginning and is called Spring MVC
+- Designed around the front-controller pattern (like other web frameworks)
+- MVC (design pattern) represents 3 components ->
+  - Model: managing application's data, business logic and business rules
+  - View: output representation of information
+  - Controller: responsible for invoking models to perform business logic and updating the view based on the model's output
+- Spring MVC has a central servlet, called **Dispatcher Servlet**, which provides shared algorithm for request processing
+- Actual work is performed by the configurable, delegated components (controllers that handle requests)
+- `DispatcherServlet` expects a `WebApplicationContext` which is an extension of a plain `ApplicationContext`, for its own configuration
+- DispatcherServet delegates to special beans to process requests and render appropriate responses
+- With the WebApplicationContext, there are some beans that are registered automatically.
+- Different **View** technologies to render web pages - Groovy Markup, Freemarker, & Thymeleaf
+- Spring MVC can also integrate with other web frameworks
