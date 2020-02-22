@@ -258,3 +258,18 @@ This annotation is a specialized `@Component`. Classes annotated with @Controlle
 
 <img width="1182" alt="Screenshot 2020-02-22 at 7 47 08 PM" src="https://user-images.githubusercontent.com/10058009/75093927-52328580-55ac-11ea-9658-6b96f89ab075.png">
 
+## Model and Model Attribute
+
+- Model interface is a holder for model attributes. Designed for adding attributes to the model. This model is exposed to the view, which means we can access the attributes in our JSP.
+- Request method supports different type of parameters, which can have different annotations. One such parameter is `Model`. The parameter is added by the servlet and is a key-value pair (map). Once we receive model as a parameter, we can add attributes to the model, which will be available in the view.
+- To use the model in our view, its used like this -> `${user}`
+- Attributes can also be added using `@ModelAttribute`
+  ```java
+  @ModelAttribute("welcomeMessage")
+  public String welcomeMessage() {
+      log.info("welcomeMessage() called");
+
+      return "Welcome to demo application";
+  }
+  ```
+- The attribute `welcomeMessage` is added to the model before any request is received by the controller
