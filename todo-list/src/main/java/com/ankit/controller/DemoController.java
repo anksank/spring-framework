@@ -32,7 +32,7 @@ public class DemoController {
     @GetMapping("welcome")
     public String welcome(Model model) {
 
-        model.addAttribute("welcomeUser", demoService.getHelloMessage("Ankit"));
+        model.addAttribute("helloMessage", demoService.getHelloMessage("Ankit"));
 
         log.info("model= {}", model);
 
