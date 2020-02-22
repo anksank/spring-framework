@@ -273,3 +273,7 @@ This annotation is a specialized `@Component`. Classes annotated with @Controlle
   }
   ```
 - The attribute `welcomeMessage` is added to the model before any request is received by the controller
+
+## @Service
+
+This is also a stereotype @Component annotation for the service layer. A controller uses classes annotated with `@Service` annotation to get calculations/business logic implementation done.
