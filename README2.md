@@ -228,3 +228,28 @@ Shortcut variants of @RequestMapping:
 This annotation is a specialized `@Component`. Classes annotated with @Controller can be used to write methods annotated with the RequestMapping Annotations.
 
 `@ResponseBody` -> This annotation means that the method return value should be bound by the response body. Hence, the browser displays this response in the web page. If not used, there would be errors complaining that the View is not available. Other option is to use views.
+
+## View Resolver and View
+
+- Spring MVC defines `ViewResolver` and `View` interfaces which enables us to render models in a broweser without using any specific view technology.
+- `ViewResolver` provides mapping between view names and actual views
+- Example: JSP, Thymeleaf, etc.
+
+### JSP
+
+- JSP text document contains 2 types of text: static (represented in the form of any text based format, like HTML) and dynamic data (JSP elements)
+- JSTL -> JavaServer Pages Standard Tag Library -> component of Java EE Web Application development platform
+- It extends JSP specifications by adding a library of JSP tags for common tasks, like loops and so on
+- JSP files are added inside WEB-INF folder, which can only be accessed by the controllers and not by the browser directly.
+  ```java
+  @Bean
+  public ViewResolver viewResolver() {
+      // InternalResourceViewResolver resolves the views by using prefix and suffix
+      UrlBasedViewResolver viewResolver = new InternalResourceViewResolver();
+      viewResolver.setPrefix(RESOLVER_PREFIX);
+      viewResolver.setSuffix(RESOLVER_SUFFIX);
+      return viewResolver;
+  }
+  ```
+- This type of view resolver uses JSTL, if it is available on the classpath.
+- When the dispatcher servlet gets a request for a view called 'welcome', the prefix and suffix will be added to it before serving the file.
