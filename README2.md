@@ -277,3 +277,15 @@ This annotation is a specialized `@Component`. Classes annotated with @Controlle
 ## @Service
 
 This is also a stereotype @Component annotation for the service layer. A controller uses classes annotated with `@Service` annotation to get calculations/business logic implementation done.
+
+## Request Parameters
+
+- `@RequestParam` annotation is used for this. The parameter is annotated with @RequestParam. It has a property called `required` to mark if the parameter is necessary for the request.
+  ```java
+  @GetMapping("welcome")
+  public String welcome(@RequestParam String user, Model model) {
+      model.addAttribute("helloMessage", demoService.getHelloMessage(user));
+      return "welcome";
+  }
+  ``` 
+- Query parameter name is user, if you want to use a different name, you can type a string with the annotation. Example: `@RequestParam("name")`
