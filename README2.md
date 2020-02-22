@@ -142,3 +142,31 @@ public class Person {
     </configuration>
   </plugin>
   ```
+
+## Maven Cargo plugin and tomcat
+
+- Using maven cargo plugin, we can manipulate war projects within apache tomcat servlet container using goals, which means tomcat can be run in embedded mode.
+- Spring boot does the same thing, where again we use embedded tomcat
+- Entry in the plugin section looks like below -
+  ```xml
+  <plugin>
+    <groupId>org.codehaus.cargo</groupId>
+    <artifactId>cargo-maven2-plugin</artifactId>
+    <version>1.7.10</version>
+    <configuration>
+        <container>
+            <containerId>tomcat9x</containerId>
+            <type>embedded</type>
+        </container>
+    </configuration>
+  </plugin>
+  ```
+- After making this change, under the plugin option of the project, you can see an option called `cargo`, under which there will be `cargo:run` which deploys the content to the container and runs the tomcat.
+- `localhost:8080/todo-list/index.html`
+
+## Setup Dispatcher Servlet
+
+- Spring MVC Dispatcher servlet is the front controller of spring MVC and is used to dispatch http requests to other controllers.
+- 2 ways to configure dispatcher servlet in container:
+  - web.xml
+  - Annotations (using Java code) (since the release of version 3)
