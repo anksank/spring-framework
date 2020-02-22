@@ -253,3 +253,8 @@ This annotation is a specialized `@Component`. Classes annotated with @Controlle
   ```
 - This type of view resolver uses JSTL, if it is available on the classpath.
 - When the dispatcher servlet gets a request for a view called 'welcome', the prefix and suffix will be added to it before serving the file.
+
+## Spring MVC Request Processing
+
+<img width="1182" alt="Screenshot 2020-02-22 at 7 47 08 PM" src="https://user-images.githubusercontent.com/10058009/75093927-52328580-55ac-11ea-9658-6b96f89ab075.png">
+
