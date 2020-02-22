@@ -1,6 +1,8 @@
 package com.ankit.controller;
 
+import com.ankit.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class DemoController {
 
+    // == fields ==
+    private final DemoService demoService;
+
+    // == constructors ==
+    @Autowired
+    public DemoController(DemoService demoService) {
+        this.demoService = demoService;
+    }
+
+    // == request methods
     @ResponseBody
     @GetMapping("/hello")
     public String hello() {
@@ -20,18 +32,20 @@ public class DemoController {
     @GetMapping("welcome")
     public String welcome(Model model) {
 
-        model.addAttribute("user", "Ankit");
+        model.addAttribute("welcomeUser", demoService.getHelloMessage("Ankit"));
+
         log.info("model= {}", model);
 
         // prefix + name + suffix is returned from this method because of the ViewResolver
         return "welcome";
     }
 
+    // == model attributes ==
     // executed before any other method, every time the controller receives a request
     @ModelAttribute("welcomeMessage")
     public String welcomeMessage() {
         log.info("welcomeMessage() called");
 
-        return "Welcome to demo application";
+        return demoService.getWelcomeMessage();
     }
 }
