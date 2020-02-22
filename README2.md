@@ -170,3 +170,14 @@ public class Person {
 - 2 ways to configure dispatcher servlet in container:
   - web.xml
   - Annotations (using Java code) (since the release of version 3)
+- Create a new configuration class and use `@EnableWebMvc` annotation, which enables the web mvc. Its used with configuration classes to import spring mvc configuration. It registers the beana specific to spring mvc. (ex: ViewResolver, RequestMapper, etc)
+- Next step would be to configure the web dispatcher servlet, for which the servlet api dependency needs to be added in the pon.
+  ```xml
+  <dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>${servlet-api.version}</version>
+    <scope>provided</scope>
+  </dependency>
+  ```
+- scope -> provided means that this dependency is provided by the servlet api, and is not packaged in the war. Saves time when uploading file in remote server. In current case, tomcat provides this dependency.
