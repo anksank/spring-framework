@@ -208,3 +208,23 @@ public class Person {
     // maps the dispatcher servlet to the url pattern specified in the parameter, which overrides the tomcat homepage
     registration.addMapping("/");
     ```
+
+## Simple Controller
+
+Dispatcher Servlet receives all the requests of the application which can be mapped to methods in classes annotated with `@Controller`. These classes are called annotated controllers or controller classes.
+
+### @RequestMapping
+
+This annotation is used to map requests to controller methods. It has various attributes to match by URL, HTTP Method, request parameters, headers, and media types.  
+Shortcut variants of @RequestMapping:
+- `@GetMapping`
+- `@PostMapping`
+- `@PutMapping`
+- `@DeleteMapping`
+- `@PatchMapping`
+
+### @Controller
+
+This annotation is a specialized `@Component`. Classes annotated with @Controller can be used to write methods annotated with the RequestMapping Annotations.
+
+`@ResponseBody` -> This annotation means that the method return value should be bound by the response body. Hence, the browser displays this response in the web page. If not used, there would be errors complaining that the View is not available. Other option is to use views.
