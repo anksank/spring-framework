@@ -294,3 +294,38 @@ This is also a stereotype @Component annotation for the service layer. A control
 
 - Classes marked as final are used when its not required to be extended. Also, private constructors are used when we dont require it to be accessed from outside world.
 - Classes containing constants/mappings are usually kept this way.
+
+## JSTL
+
+- JavaServer Pages Standard Tag Library is a collection of useful JSP tags which encapsulates the core functionality common to many JSP applications.
+- It has support for common structural tasks, such as iteration and conditionals, tags for manipulating XML documents, SQL tags, etc.
+- Divided into the following groups:
+  - Core Tags
+    Examples: 
+    - `<c:forEach>` : for iterating over a collection
+    - `<c:out>` : to display results of an expression
+    - `<c:url>` : to format a URL into a string and store it into a variable
+  - Formatting Tags
+  - SQL Tags
+  - XML Tags 
+  - JSTL Functions
+- Spring also has tags.
+- JSTL dependency
+  ```xml
+  <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+  </dependency>
+  ```
+- To use JSTL in a jsp, it needs to be imported in the jsp file.
+  `<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>`
+- Example of a forEach tag
+  ```xml
+  <c:forEach var="item" items="${toDoData.items}">
+      <tr>
+          <td><c:out value="${item.title}"/></td>
+          <td><c:out value="${item.deadline}"/></td>
+      </tr>
+  </c:forEach>
+  ```
