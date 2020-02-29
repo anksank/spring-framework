@@ -289,3 +289,8 @@ This is also a stereotype @Component annotation for the service layer. A control
   }
   ``` 
 - Query parameter name is user, if you want to use a different name, you can type a string with the annotation. Example: `@RequestParam("name")`
+
+## private and final classes
+
+- Classes marked as final are used when its not required to be extended. Also, private constructors are used when we dont require it to be accessed from outside world.
+- Classes containing constants/mappings are usually kept this way.
