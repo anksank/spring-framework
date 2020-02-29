@@ -318,7 +318,7 @@ This is also a stereotype @Component annotation for the service layer. A control
       <version>1.2</version>
   </dependency>
   ```
-- To use JSTL in a jsp, it needs to be imported in the jsp file.
+- To use JSTL in a jsp, it needs to be imported in the jsp file.  
   `<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>`
 - Example of a forEach tag
   ```xml
