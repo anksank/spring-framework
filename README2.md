@@ -329,3 +329,17 @@ This is also a stereotype @Component annotation for the service layer. A control
       </tr>
   </c:forEach>
   ```
+  
+## Spring Form tags
+
+- Directive for spring form tags:  
+  `<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>`
+- We can bind the entire form to a single parameter in a model attribute method.
+- Importing a class with constants to a JSP:  
+  `<%@ page import="com.ankit.util.AttributeNames" %>`
+- Example:
+  ```xml
+  <form:form method="POST" modelAttribute="${AttributeNames.TODO_ITEM}">
+  <table><table/>
+  </form:form>
+  ```
