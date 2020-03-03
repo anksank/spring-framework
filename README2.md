@@ -367,4 +367,4 @@ This is also a stereotype @Component annotation for the service layer. A control
   }
   ```
   This is used in cases when no custom logic for controllers is required, or just for performing some re-directs.
-  Changes can be seen (here)[https://github.com/anksank/spring-framework/commit/4c6c1d8b14fe684890a18d97f5037bbad3bc2cb0#diff-41cde35dc39a6f5df1066ce66fb40801]
+  Changes can be seen [here](https://github.com/anksank/spring-framework/commit/4c6c1d8b14fe684890a18d97f5037bbad3bc2cb0#diff-41cde35dc39a6f5df1066ce66fb40801)
