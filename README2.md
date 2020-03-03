@@ -343,3 +343,28 @@ This is also a stereotype @Component annotation for the service layer. A control
   <table><table/>
   </form:form>
   ```
+
+## Home View and Navigation
+
+- Creating a link in JSP:
+  ```jsp
+  <c:url var="itemsLink" value="${Mappings.ITEMS}"/>
+  <h2><a href="${itemsLink}">Show ToDo Items</a></h2>
+  ```
+  `itemsLink` is the variable in which the value of link `${Mappings.ITEMS}` is stored.
+- Adding parameters to links:
+  ```jsp
+  <c:url var="deleteUrl" value="${Mappings.DELETE_ITEM}">
+      <c:param name="id" value="${item.id}"/>
+  </c:url>
+  ```
+- Implement the configuration class from `WebMvcConfigurer`: This interface defines callback methods to customize the Java based configurations for spring MVC which was enabled by the `@EnableWebMvc` annotation. This interface has some default methods that can be implemented, for example: `addViewControllers` -> It is used to configure simple automated controllers that are pre-configured with a response status code or a view to render the responsebody. We configure in the path of a view and spring will use it to create a controller.
+  Example:
+  ```java
+  @Override
+  public void addViewControllers(ViewControllerRegistry registry) {
+      registry.addViewController("/").setViewName(ViewNames.HOME);
+  }
+  ```
+  This is used in cases when no custom logic for controllers is required, or just for performing some re-directs.
+  Changes can be seen (here)[https://github.com/anksank/spring-framework/commit/4c6c1d8b14fe684890a18d97f5037bbad3bc2cb0#diff-41cde35dc39a6f5df1066ce66fb40801]
