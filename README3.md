@@ -19,3 +19,19 @@ Spring boot is a framework that helps developers build stand-alone, production g
 Online Spring boot application generator used to create Spring boot applications from scratch.
 
 - Goto [start.spring.io](https://start.spring.io) to quickly create and generate a spring boot application.
+
+## Understanding Spring Boot Structure
+
+- Extra folders that exist in spring boot application:
+  - `.mvn`
+    - `wrapper`
+      - `maven-wrapper.jar`
+      - `maven-wrapper.properties` -> These files help in running maven goals without installing maven, so that application can be run using console
+  - `src`
+    - `main`
+      - `resources`
+        - `static` -> for static content like html, css, js, etc. -> auto-detected by spring-boot
+        - `templates` -> dynamic content like thymeleaf and groovy templates -> auto-detected by spring-boot
+        - `application.properties` -> for things like database urls, service ports, and other application dependent properties.
+  - `mvnw`
+  - `mvnc.cmd` -> batch scripts available to run from the console without installing and configuring maven
