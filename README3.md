@@ -13,3 +13,9 @@ Spring boot is a framework that helps developers build stand-alone, production g
   - Embedded container servlet support
   - Elegant configuration management
 - Using spring boot, we can configure self contained JAR Application with an embedded servlet container instead of creating a WAR.
+
+## Using Spring Initializr
+
+Online Spring boot application generator used to create Spring boot applications from scratch.
+
+- Goto [start.spring.io](https://start.spring.io) to quickly create and generate a spring boot application.
