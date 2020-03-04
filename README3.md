@@ -35,3 +35,42 @@ Online Spring boot application generator used to create Spring boot applications
         - `application.properties` -> for things like database urls, service ports, and other application dependent properties.
   - `mvnw`
   - `mvnc.cmd` -> batch scripts available to run from the console without installing and configuring maven
+- `@SpringBootApplication` annotation automatically enables scanning and auto-configuration allowing this class to be used as a configuration class, which means we can define bean methods inside it.
+
+## Simple Spring Boot Application
+
+- [Branch](https://github.com/anksank/spring-framework/tree/015-Spring-Boot) with all changes
+- `logback-spring.xml` needs to be created which will contain the logback configuration like the previous spring projects. By renaming the file, we allow spring to completely control the log initialization. This cannot happen if file name is logback.xml since the standard configuration is loaded too early. Hence, this is a standard by spring-boot. Since we have given spring the control over log initialization, we can make this file shorter.
+  - Remove the `appender` and `root` section of this xml.
+  - Adding the following include tag will help us load the configuration from another file:  
+    `<include resource="org/springframework/boot/logging/logback/base.xml"/>`
+    - Content of base.xml:
+      ```xml
+      <?xml version="1.0" encoding="UTF-8"?>
+      <included>
+        <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+        <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
+        <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+        <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+        <root level="INFO">
+          <appender-ref ref="CONSOLE" />
+          <appender-ref ref="FILE" />
+        </root>
+      </included>
+      ```
+      Since the xml contains `<included>` it can be included in other configurations. Also, the file `console-appender.xml` uses `${CONSOLE_LOG_PATTERN}` which can be defined in application.properties file. But, we can also go ahead and use default configuration.
+- It is recommended to leave the main application class in the root package, so that it is able to scan and find other configuration classes.
+- After adding a simple controller class, we can run the application on `localhost:8080/demo` without giving the name of the application. This happens because spring takes care of shortening the URL and taking care of the fact that we dont need to add the name of application in URL.
+
+### Configuring ANSI colors in the console
+
+In application.properties, we add `spring.output.ansi.enabled = always`.
+
+### Automatic configuration of the ViewResolver
+
+This can also be done just by adding a configuration in the application.properties file:
+```properties
+spring.mvc.view.prefix=/WEB-INF/view
+spring.mvc.view.suffix=.jsp
+```
+**LIMITATION:** However, there are limitations when jsp is run with embedded containers.
