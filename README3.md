@@ -74,3 +74,8 @@ spring.mvc.view.prefix=/WEB-INF/view
 spring.mvc.view.suffix=.jsp
 ```
 **LIMITATION:** However, there are limitations when jsp is run with embedded containers.
+
+## Add Spring Boot to an existing project
+
+- Changes can be seen [here](https://github.com/anksank/spring-framework/commit/ad21dd65ab655eb72f6f4c13af6cc62de0715d48?diff=split)
+- properties cannot be used with parent tag
