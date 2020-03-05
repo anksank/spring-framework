@@ -92,4 +92,4 @@ Modern server-side Java template engine used in web and standalone environments.
 - Extensible template engine -> template engine framework that allows you the create and customize processing of your templates.
 - Integrates with Spring 3, 4, 5 as well as Spring Boot.
 - Supports fragments -> smaller templates that we can reuse across the application.
-- Supports decouples template logic -> we can separate thymeleaf tags from HTML and the template engine will process it.
+- Supports decoupling template logic -> we can separate thymeleaf tags from HTML and the template engine will process it.
