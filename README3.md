@@ -79,3 +79,17 @@ spring.mvc.view.suffix=.jsp
 
 - Changes can be seen [here](https://github.com/anksank/spring-framework/commit/ad21dd65ab655eb72f6f4c13af6cc62de0715d48?diff=split)
 - properties cannot be used with parent tag
+
+## Thymeleaf
+
+Modern server-side Java template engine used in web and standalone environments.
+
+- White Thymeleaf, HTML can be displayed correctly in browsers as a static prototype (we can preview HTML without processing a template, which happens in case of JSPs).
+- Easy integration with Spring and Java EE
+- Thymeleaf has templates, which are just HTML files with Thymeleaf attributes.
+- These templates are written in Thymeleaf and looks like regular HTML.
+- Supports processing of HTML, XML, JavaScript, CSS and plain text out of the box.
+- Extensible template engine -> template engine framework that allows you the create and customize processing of your templates.
+- Integrates with Spring 3, 4, 5 as well as Spring Boot.
+- Supports fragments -> smaller templates that we can reuse across the application.
+- Supports decouples template logic -> we can separate thymeleaf tags from HTML and the template engine will process it.
