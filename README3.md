@@ -1,4 +1,4 @@
-# Spring Framework (Section 8)
+# Spring Framework (Section 8 & 9)
 
 ## Spring Boot
 
@@ -118,3 +118,21 @@ Sample thymeleaf file:
 </body>
 </html>
 ```
+
+## Spring Boot developer tools
+
+One of the most useful feauture -> ability to sense when files on the classpath have changed, and then allow you to do a near automatic restart of the application.
+
+Dependency:
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+
+- Scope runtime means that spring will take care of adding this dependency and it will be done in the runtime.
+  - Its disabled when running a full packages application (released version)
+
+  
