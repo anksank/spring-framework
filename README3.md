@@ -133,6 +133,6 @@ Dependency:
 ```
 
 - Scope runtime means that spring will take care of adding this dependency and it will be done in the runtime.
-  - Its disabled when running a full packages application (released version)
+  - Its disabled when running a full packaged application (released version)
 
   
