@@ -146,3 +146,31 @@ Dependency:
 - T operator is used to specify an instance of a Java Class, so it can be used to invoke static methods or get the value of static variables
   Example: `${__${T(com.ankit.util.AttributeNames)}.RESULT_MESSAGE}`
 - `@{}` -> special syntax for URLs
+
+## Thymeleaf Fragments
+
+- `th:fragment` can be used to define a fragment.
+- To insert a fragment, we use fragment expression, `~{...}`.
+- Fragment can be selected by name or by the CSS selector the syntax is `~{templatename::selector}`
+  Example: `~{templatename:fragmentname}`
+- Reduces code duplications.
+- Parameters can be passed to fragments and can be displayed based on conditions.
+
+Example use in a html file:
+```html
+<footer th:replace="~{fragments/footer::footFragment}">
+  <p>Footer</p>
+</footer>
+```
+
+Footer Fragment definition:
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <footer th:fragment="footFragment">
+        <p>Created by Ankit .</p>
+    </footer>
+</body>
+</html>
+```
