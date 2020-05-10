@@ -151,7 +151,7 @@ Dependency:
 
 - `th:fragment` can be used to define a fragment.
 - To insert a fragment, we use fragment expression, `~{...}`.
-- Fragment can be selected by name or by the CSS selector the syntax is `~{templatename::selector}`
+- Fragment can be selected by name or by the CSS selector the syntax is `~{templatename::selector}`.  
   Example: `~{templatename:fragmentname}`
 - Reduces code duplications.
 - Parameters can be passed to fragments and can be displayed based on conditions.
