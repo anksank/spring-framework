@@ -135,4 +135,14 @@ Dependency:
 - Scope runtime means that spring will take care of adding this dependency and it will be done in the runtime.
   - Its disabled when running a full packaged application (released version)
 
-  
+## Thymeleaf Preprocessing
+
+- Some expressions in thymeleaf can be processed twice.
+- Preprocessing is an execution of expressions done before the normal expression execution.
+- Gives ability to modify an expression that will be executed.
+- These expressions are like normal expressions but are surrounded by underscores(**__**).
+  Example: `${__${resultMessage}__}`
+- Feature is used when constants are used in templates or for supporting multiple languages.
+- T operator is used to specify an instance of a Java Class, so it can be used to invoke static methods or get the value of static variables
+  Example: `${__${T(com.ankit.util.AttributeNames)}.RESULT_MESSAGE}`
+- `@{}` -> special syntax for URLs
