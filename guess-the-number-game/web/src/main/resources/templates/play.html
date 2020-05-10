@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{fragments/head::headFragment}">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Game</title>
 </head>
 <body>
-<div align="center">
-    <h1>Guess The Number Game</h1>
-    <h3 th:text="${__${T(com.ankit.util.AttributeNames).MAIN_MESSAGE}__}">
-        Main message content
-    </h3>
-    <h3 th:text="${__${T(com.ankit.util.AttributeNames).RESULT_MESSAGE}__}">
-        Result message content
-    </h3>
+    <div align="center">
+        <h1>Guess The Number Game</h1>
+        <h3 th:text="${__${T(com.ankit.util.AttributeNames).MAIN_MESSAGE}__}">
+            Main message content
+        </h3>
+        <h3 th:text="${__${T(com.ankit.util.AttributeNames).RESULT_MESSAGE}__}">
+            Result message content
+        </h3>
 
-    <form th:action="${__${T(com.ankit.util.GameMappings).PLAY}__}" action="play" method="post">
-        <label for="guess">Enter your guess</label>
-        <input id="guess" type="number" name="guess"/>
-        <input type="submit" value="Submit"/>
-    </form>
+        <form th:action="${__${T(com.ankit.util.GameMappings).PLAY}__}" action="play" method="post">
+            <label for="guess">Enter your guess</label>
+            <input id="guess" type="number" name="guess"/>
+            <input type="submit" value="Submit"/>
+        </form>
 
-    <footer>
-        <p>Created by Ankit .</p>
-    </footer>
-</div>
+        <footer>
+            <p>Created by Ankit .</p>
+        </footer>
+    </div>
 </body>
 </html>
