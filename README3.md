@@ -174,3 +174,17 @@ Footer Fragment definition:
 </body>
 </html>
 ```
+
+## Thymeleaf Decoupled Template Logic
+
+- Thymeleaf allows decoupling of template and logic -> Template logic can be defined in a separate file from the HTML file.
+- **Logic** file is an additional file in the same folder with the same filename with an extension **.th.xml**.
+- Example: home.html (template file) and home.th.xml (logic file).
+- Thymeleaf processes both the files together and generates the final structure
+- With Spring 2.0.3, this option is not automatically enabled, we need to enable it.
+
+### Enabling decoupling of logic and template
+
+- This property does not exist as part of the application.properties as of version 2.0.3 of spring boot, hence we create a class and use it to set this property.
+- `SpringResourceTemplateResolver` is a class that finds templates in the template directory when controller returns the view name.
+- Code for this exists [here](https://github.com/anksank/spring-framework/commit/e2218cc4dd5ceb7842e03a214d33a7faa13a31a8?diff=unified).
