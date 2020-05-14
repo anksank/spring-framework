@@ -192,3 +192,10 @@ Footer Fragment definition:
 ### Adding Decouling Logic: Example
 
 - [code](https://github.com/anksank/spring-framework/pull/9/commits/6a763233ca83e5152cc5c191fe69e08a890d8ecf)
+
+## Spring Internationalization
+
+- By default, spring boot application will look for message files containing internationalization keys and values in the src/main/resources directory.
+- The file for default locale has the name **messages.properties**, and files for each other locale will be names **message_XX.properties**, where **XX** is the locale code.  
+  Example: messages_fr.properties would be for French Language and messages_es.properties is for Spanish language.
+- Messages always have a key that identifies them, and thymeleaf allows you to specify that a text should correspond to a specific message with the #{...} syntax.
