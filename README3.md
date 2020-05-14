@@ -188,3 +188,7 @@ Footer Fragment definition:
 - This property does not exist as part of the application.properties as of version 2.0.3 of spring boot, hence we create a class and use it to set this property.
 - `SpringResourceTemplateResolver` is a class that finds templates in the template directory when controller returns the view name.
 - Code for this exists [here](https://github.com/anksank/spring-framework/commit/e2218cc4dd5ceb7842e03a214d33a7faa13a31a8?diff=unified).
+
+### Adding Decouling Logic: Example
+
+- [code](https://github.com/anksank/spring-framework/pull/9/commits/6a763233ca83e5152cc5c191fe69e08a890d8ecf)
