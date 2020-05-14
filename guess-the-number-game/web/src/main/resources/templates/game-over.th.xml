@@ -1,12 +1,12 @@
 <thlogic>
     <attr sel="#headId"
           th:replace="~{fragments/head::headFragment}" />
-    <attr sel="#main-message"
-          th:text="${__${T(com.ankit.util.AttributeNames).MAIN_MESSAGE}__}" />
     <attr sel="#result-message"
           th:text="${__${T(com.ankit.util.AttributeNames).RESULT_MESSAGE}__}" />
-    <attr sel="#game-form"
-          th:action="${__${T(com.ankit.util.GameMappings).PLAY}__}" />
+    <attr sel="#play-again"
+          th:href="@{__${T(com.ankit.util.GameMappings).RESTART}__}" />
+    <attr sel="#homeId"
+          th:href="@{__${T(com.ankit.util.GameMappings).HOME}__}" />
     <attr sel="#footerId"
           th:replace="~{fragments/footer::footFragment}" />
 </thlogic>

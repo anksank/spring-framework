@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head::headFragment}">
+<html lang="en">
+<head id="headId">
     <meta charset="UTF-8">
-    <title>Title Content</title>
+    <title>Game</title>
 </head>
 <body>
-    <div align="center">
-        <h1>Welcome to Guess The Number Game</h1>
-        <h3>
-            <a th:href="@{__${T(com.ankit.util.GameMappings).PLAY}__}"
-               th:text="Play"
-               href="play.html">
-                Click to Play
-            </a>
-        </h3>
+<div align="center">
+    <h1>Welcome to Guess The Number Game</h1>
+    <h3>
+        <a id="game-play"
+           href="play.html">
+            Click to Play
+        </a>
+    </h3>
 
-        <div th:replace="~{fragments/footer::footFragment}">
-            Footer goes here
-        </div>
+    <div id="footerId">
+        Footer goes here
     </div>
+</div>
 </body>
 </html>
