@@ -216,3 +216,4 @@ Footer Fragment definition:
   <attr sel="#created-by" th:text="|#{game.createdBy} Ankit .|" />
   ```
   Thymeleaf only processes the expressions and text remains as it is in all languages. Pipe characters is used for this.
+- List of all language codes supported: [Link](https://www.oracle.com/java/technologies/javase/jdk8-jre8-suported-locales.html)
