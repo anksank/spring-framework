@@ -195,7 +195,24 @@ Footer Fragment definition:
 
 ## Spring Internationalization
 
-- By default, spring boot application will look for message files containing internationalization keys and values in the src/main/resources directory.
+- By default, spring boot application will look for message files containing internationalization keys and values in the **src/main/resources** directory.
 - The file for default locale has the name **messages.properties**, and files for each other locale will be names **message_XX.properties**, where **XX** is the locale code.  
   Example: messages_fr.properties would be for French Language and messages_es.properties is for Spanish language.
-- Messages always have a key that identifies them, and thymeleaf allows you to specify that a text should correspond to a specific message with the #{...} syntax.
+- Messages always have a key that identifies them, and thymeleaf allows you to specify that a text should correspond to a specific message with the #{...} syntax.  
+  Example:
+  ```xml
+  <attr sel="#game-title" th:text="#{game.title}" />
+  ```
+- Change in application properties file  
+  ```properties
+  # this propertiy sets the locale to Spanish 
+  spring.mvc.locale=es
+  # this property sets the resolving mechanish to fixed, which means, locale will be spanish no matter what the locale of request or response is
+  spring.mvc.locale-resolver=fixed
+  ```
+- If default encoding in your IDE is not set to UTF-8, you might see random characters while running the application.
+- Literal substitution in thymeleaf. Example:  
+  ```xml
+  <attr sel="#created-by" th:text="|#{game.createdBy} Ankit .|" />
+  ```
+  Thymeleaf only processes the expressions and text remains as it is in all languages. Pipe characters is used for this.
